@@ -306,7 +306,7 @@ Without cuDNN, each epoch takes about 21s. If you install [TechPowerUp's GPU-Z](
 
 ## cuDNN v5 (Conditional)
 
-If you're not going to train convnets then you might not really benefit from installing cuDNN. Per NVidia's [website](https://developer.nvidia.com/cudnn), "cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers," hallmarks of convolution network architecture. Theano is listed in the list of [frameworks that support cuDNN v5](https://developer.nvidia.com/deep-learning-frameworks) for GPU acceleration.
+If you're not going to train convnets then you might not really benefit from installing cuDNN. Per NVidia's [website](https://developer.nvidia.com/cudnn), "cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers," hallmarks of convolution network architectures. Theano is mentioned in the list of [frameworks that support cuDNN v5](https://developer.nvidia.com/deep-learning-frameworks) for GPU acceleration.
 
 If you are going to train convnets, then download cuDNN from [here](https://developer.nvidia.com/rdp/cudnn-download). Choose the cuDNN Library for Windows10 dated May 12, 2016:
 
@@ -360,7 +360,7 @@ Intro to Deep Learning with Python, by Alec Radford
 
 # About the Author
 
-For more info about the author, please visit:
+For information about the author, please visit:
 
 [![https://www.linkedin.com/in/philferriere](https://dl.dropboxusercontent.com/u/5888080/LinkedInDevLead.png)](https://www.linkedin.com/in/philferriere)
 
