@@ -1,7 +1,7 @@
 GPU-accelerated Theano & Keras on Windows 10 native
 ===================================================
 
-Why write about this? First, we found enough misguiding/deprecated information out there to make it worthwhile having an update that uses the latest stable versions of Theano and Keras. Second, there are certainly a lot of guides to assist you build great deep learning (DL) setups on Linux or Mac OS (including with Tensorflow which, unfortunately, as of this posting, cannot be easily installed on Windows), but few care about building an efficient Windows 10-**native** setup. Most focus on using a Ubuntu VM hosted on Windows (or using Docker).  So, if you **must** run your DL setup on Windows 10, then the information contained here may be useful to you..
+Why write about this? First, we found enough misguiding/deprecated information out there to make it worthwhile having an update that uses the latest stable versions of Theano and Keras. Second, there are certainly a lot of guides to assist you build great deep learning (DL) setups on Linux or Mac OS (including with Tensorflow which, unfortunately, as of this posting, cannot be easily installed on Windows), but few care about building an efficient Windows 10-**native** setup. Most focus on using a Ubuntu VM hosted on Windows (or using Docker). So, if you **must** run your DL setup on Windows 10, then the information contained here may be useful to you.
 
 # Dependencies
 Here's a summary list of the tools and libraries we use for deep learning on Windows 10:
@@ -32,7 +32,7 @@ Here's a summary list of the tools and libraries we use for deep learning on Win
 
 # Installation steps
 
-We like to keep our toolkits and libraries in a single root folder boringly called `c:\toolkits`, so whenever you see a Windows path that starts with `c:\toolkits` below, make sure to replace it with whatever you decide your own toolkit drive and folder should be.
+We like to keep our toolkits and libraries in a single root folder boringly called `c:\toolkits`, so whenever you see a Windows path that starts with `c:\toolkits` below, make sure to replace it with whatever you decide your own toolkit drive and folder ought to be.
 
 ## Visual Studio 2013 Community Edition Update 4
 
@@ -53,9 +53,9 @@ Download the installer:
 
 ![](img/cuda-downloads-win10b.png)
 
-Run the installer. In our case (a fluke?) the installer didn't allow us to choose where to install its files. It installed in `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5`. Once it has done so, move the files from there to `c:\toolkits\cuda-7.5.18` and and update `%PATH%` as follows:
+Run the installer. In our case (a fluke?) the installer didn't allow us to choose where to install its files. It installed in `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5`. Once it has done so, move the files from there to `c:\toolkits\cuda-7.5.18` and update `PATH` as follows:
 
-1. Define sysenv variable `CUDA_HOME` with the value `c:\toolkits\cuda-7.5.18`
+1. Define a system environment (sysenv) variable named `CUDA_HOME` with the value `c:\toolkits\cuda-7.5.18`
 2. Add`%CUDA_HOME%\libnwp` and `%CUDA_HOME%\bin` to `PATH`
 
 ## MinGW-w64 (5.3.0)
@@ -108,7 +108,7 @@ $ conda install libpython
 
 Version 0.8.2? Why not just install the latest bleeding-edge version of Theano since it obviously must work better, right? Simply put, because it makes [reproducible research](https://www.coursera.org/learn/reproducible-research) harder. If your work colleagues or Kaggle teammates install the latest code from the dev branch at a different time than you did, you will most likely be running different code bases on your machines, increasing the odds that even though you're using the same input data (the same random seeds, etc.), you still end up with different results when you shouldn't. For this reason alone, we highly recommend only using point releases, the same one across machines, and always documenting which one you use if you can't just use a setup script.
 
-Clone a stable Theano release (0.8.2) to your local machine from github using the following commands:
+Clone a stable Theano release (0.8.2) to your local machine from GitHub using the following commands:
 
 ```
 $ cd /c/toolkits
