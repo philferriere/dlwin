@@ -1,7 +1,11 @@
 GPU-accelerated Theano & Keras on Windows 10 native
 ===================================================
 
-Why write about this? First, we found enough misguiding/deprecated information out there to make it worthwhile having an update that uses the latest stable versions of Theano and Keras. Second, there are certainly a lot of guides to assist you build great deep learning (DL) setups on Linux or Mac OS (including with Tensorflow which, unfortunately, as of this posting, cannot be easily installed on Windows), but few care about building an efficient Windows 10-**native** setup. Most focus on using a Ubuntu VM hosted on Windows (or using Docker). So, if you **must** run your DL setup on Windows 10, then the information contained here may be useful to you.
+There are certainly a lot of guides to assist you build great deep learning (DL) setups on Linux or Mac OS (including with Tensorflow which, unfortunately, as of this posting, cannot be easily installed on Windows), but few care about building an efficient Windows 10-**native** setup. Most focus on running an Ubuntu VM hosted on Windows or using Docker, unnecessary - and ultimately sub-optimal - steps.
+
+We also found enough misguiding/deprecated information out there to make it worthwhile putting together a step-by-step guide for the latest stable versions of Theano and Keras. Used together, they make for one of the simplest and fastest DL configurations to work natively on Windows.
+
+If you **must** run your DL setup on Windows 10, then the information contained here may be useful to you.
 
 # Dependencies
 Here's a summary list of the tools and libraries we use for deep learning on Windows 10:
@@ -25,7 +29,7 @@ Here's a summary list of the tools and libraries we use for deep learning on Win
 
 # Hardware
 
-1. Dell Precision T7500, 96BG RAM
+1. Dell Precision T7500, 96GB RAM
    - Intel Xeon E5605 @ 2.13 GHz (2 processors, 8 cores total)
 2. NVIDIA GeForce Titan X, 12GB RAM
    - Driver version: 10.18.13.5390 Beta (ForceWare 353.90) / Win 10 64
