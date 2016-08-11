@@ -64,7 +64,7 @@ Run the installer. In our case (a fluke?) the installer didn't allow us to choos
 
 ## MinGW-w64 (5.3.0)
 
-Download MinGW-w64 from [here](http://mingw-w64.org/doku.php/download):
+Download MinGW-w64 from [here](https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/):
 
 ![](img/mingw-download.png)
 
