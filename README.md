@@ -40,7 +40,21 @@ We like to keep our toolkits and libraries in a single root folder boringly call
 
 ## Visual Studio 2013 Community Edition Update 4
 
-You can download Visual Studio 2013 Community Edition from [here](https://www.visualstudio.com/en-us/news/vs2013-community-vs.aspx). Yes, we're aware there's a Visual Studio 2015 Community Edition, and it is also installed on our system, **BUT** the CUDA toolkit won't even attempt to use it, as shown below:
+<s>You can download Visual Studio 2013 Community Edition from [here](https://www.visualstudio.com/en-us/news/vs2013-community-vs.aspx).</s>
+
+**>>> EDIT (October 2016)**
+
+Per [valtron](https://github.com/valtron): It's no longer possible to link directly to VS2013. Instead, one has to:
+
+1. Go to https://www.visualstudio.com/vs/older-downloads/
+2. "Already a member? Sign in"
+3. Use http://bugmenot.com/view/microsoftonline.com if you don't have an account
+4. Go to https://my.visualstudio.com/downloads
+5. Ctrl+F "Visual Studio Express 2013 for Windows with Update 4"
+
+**<<< EDIT**
+
+Yes, we're aware there's a Visual Studio 2015 Community Edition, and it is also installed on our system, **BUT** the CUDA 7.5 toolkit won't even attempt to use it, as shown below:
 
 ![](img/cuda-needs-vs2013.png)
 
