@@ -58,9 +58,9 @@ Run the downloaded executable to install Visual Studio, using whatever additiona
 
 ![](img/vs2015-install-part2-2016-10.png)
 
-![](img/vs2015-install-part3-2016-10.png)
+![](img/vs2015-install-part3b-2016-10.png)
 
-![](img/vs2015-install-part4-2016-10.png)
+![](img/vs2015-install-part4b-2016-10.png)
 
 1. Add `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin` to your `PATH`, based on where you installed VS 2015.
 2. Define sysenv variable `INCLUDE` with the value `C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt`
