@@ -12,8 +12,8 @@ If you **must** run your DL setup on Windows 10, then the information contained 
 # Dependencies
 Here's a summary list of the tools and libraries we use for deep learning on Windows 10 (Version 1607 OS Build 14393.222):
 
-1. Visual Studio 2015 Community Edition Update 3 w. Windows Kits 8.1 and 10.0.10240.0
-   - Used for its C/C++ compiler (not its IDE) and SDKs
+1. Visual Studio 2015 Community Edition Update 3 w. Windows Kit 10.0.10240.0
+   - Used for its C/C++ compiler (not its IDE) and SDK
 2. Anaconda (64-bit) w. Python 2.7 (Anaconda2-4.2.0)
    - A Python distro that gives us NumPy, SciPy, and other scientific libraries
 3. CUDA 8.0.44 (64-bit)
@@ -22,7 +22,7 @@ Here's a summary list of the tools and libraries we use for deep learning on Win
    - Used for its Unix-like compiler and build tools (g++/gcc, make...) for Windows
 5. Theano 0.8.2
    - Used to evaluate mathematical expressions on multi-dimensional arrays
-6. Keras 1.0.5
+6. Keras 1.1.0
    - Used for deep learning on top of Theano
 7. OpenBLAS 0.2.14 (Optional)
    - Used for its CPU-optimized implementation of many linear algebra operations
@@ -42,7 +42,7 @@ For an older setup using VS2013 and CUDA 7.5, please refer to [README-2016-07.md
 
 We like to keep our toolkits and libraries in a single root folder boringly called `c:\toolkits`, so whenever you see a Windows path that starts with `c:\toolkits` below, make sure to replace it with whatever you decide your own toolkit drive and folder ought to be.
 
-## Visual Studio 2015 Community Edition Update 3 w. Windows Kits 8.1 and 10.0.10240.0
+## Visual Studio 2015 Community Edition Update 3 w. Windows Kit 10.0.10240.0
 
 You can download Visual Studio 2015 Community Edition from [here](https://www.microsoft.com/en-us/download/details.aspx?id=48146):
 
@@ -64,7 +64,7 @@ Run the downloaded executable to install Visual Studio, using whatever additiona
 
 1. Add `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin` to your `PATH`, based on where you installed VS 2015.
 2. Define sysenv variable `INCLUDE` with the value `C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt`
-3. Define sysenv variable `LIB` with the value `C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10240.0\um\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10240.0\ucrt\x64`
+3. Define sysenv variable `LIB` with the value `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10240.0\um\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10240.0\ucrt\x64`
 
 > Reference Note: We couldn't run any Theano python files until we added the last two env variables above. We would get a `c:\program files (x86)\microsoft visual studio 14.0\vc\include\crtdefs.h(10): fatal error C1083: Cannot open include file: 'corecrt.h': No such file or directory` error at compile time and missing `kernel32.lib uuid.lib ucrt.lib` errors at link time. True, you could probably run `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat` (with proper params) every single time you open a MINGW cmd prompt, but, obviously, none of the sysenv vars would stick from one session to the next.
 
@@ -172,7 +172,7 @@ $ cd /c/toolkits/theano-0.8.2
 $ python setup.py install --record installed_files.txt
 ```
 
-The list of files installed can be found [here](https://dl.dropboxusercontent.com/u/5888080/installed_files.txt)
+The list of files installed can be found [here](installed_files/theano-0.8.2_installed_files.txt)
 
 Verify Theano was installed by querying Anaconda for the list of installed packages:
 
@@ -334,29 +334,29 @@ $ python cpu_gpu_test.py
 
 Almost **a 68:1 improvement**. It works! Great, we're done with setting up Theano 0.8.2.
 
-## Keras 1.0.5
+## Keras 1.1.0
 
-Clone a stable Keras release (1.0.5) to your local machine from GitHub using the following commands:
+Clone a stable Keras release (1.1.0) to your local machine from GitHub using the following commands:
 
 ```
 $ cd /c/toolkits
-$ git clone https://github.com/fchollet/keras.git keras-1.0.5 --branch 1.0.5
+$ git clone https://github.com/fchollet/keras.git keras-1.1.0 --branch 1.1.0
 ```
 
 ![](img/keras-git-2016-10.png)
 
-This should clone Keras 1.0.5 in `c:\toolkits\keras-1.0.5`:
+This should clone Keras 1.1.0 in `c:\toolkits\keras-1.1.0`:
 
 ![](img/keras-dir-2016-10.png)
 
 Install it as follows:
 
 ```
-$ cd /c/toolkits/keras-1.0.5
+$ cd /c/toolkits/keras-1.1.0
 $ python setup.py install --record installed_files.txt
 ```
 
-The list of files installed can be found [here](https://dl.dropboxusercontent.com/u/5888080/installed_files2.txt)
+The list of files installed can be found [here](installed_files/keras-1.1.0_installed_files.txt)
 
 Verify Keras was installed by querying Anaconda for the list of installed packages:
 
@@ -372,13 +372,13 @@ We can train a simple convnet ([convolutional neural network](https://en.wikiped
 
 ```
 $ THEANO_FLAGS=$THEANO_FLAGS_GPU
-$ cd /c/toolkits/keras-1.0.5/examples
+$ cd /c/toolkits/keras-1.1.0/examples
 $ python mnist_cnn.py
 ```
 
 ![](img/mnist_cnn_gpu_log-2016-10.png)
 
-Without cuDNN, each epoch takes about 19s. If you install [TechPowerUp's GPU-Z](https://www.techpowerup.com/downloads/SysInfo/GPU-Z/), you can track how well the GPU is being leveraged. Here, in the case of this convnet (no cuDNN), we max out at 92% GPU usage on average:
+Without cuDNN, each epoch takes about 20s. If you install [TechPowerUp's GPU-Z](https://www.techpowerup.com/downloads/SysInfo/GPU-Z/), you can track how well the GPU is being leveraged. Here, in the case of this convnet (no cuDNN), we max out at 92% GPU usage on average:
 
 ![](img/mnist_cnn_gpu_usage-2016-10.png)
 
@@ -400,7 +400,7 @@ Then, run the following commands:
 
 ```
 $ THEANO_FLAGS=$THEANO_FLAGS_GPU_DNN
-$ cd /c/toolkits/keras-1.0.5/examples
+$ cd /c/toolkits/keras-1.1.0/examples
 $ python mnist_cnn.py
 ```
 
@@ -410,7 +410,7 @@ Here's the (cleaned up) execution log for the simple convnet Keras example, usin
 
 ![](img/mnist_cnn_gpu_cudnn_log-2016-10.png)
 
-Now, each epoch takes about 3s, instead of 19s, **a large improvement in speed**, with slightly lower GPU usage:
+Now, each epoch takes about 3s, instead of 20s, **a large improvement in speed**, with slightly lower GPU usage:
 
 ![](img/mnist_cnn_gpu_cudnn_usage-2016-10.png)
 
