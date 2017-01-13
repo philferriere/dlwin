@@ -1,7 +1,7 @@
 GPU-accelerated Theano & Keras on Windows 10 native
 ===================================================
 
-**>> LAST UPDATED OCTOBER, 2016 <<**
+**>> LAST UPDATED JANUARY, 2017 <<**
 
 There are certainly a lot of guides to assist you build great deep learning (DL) setups on Linux or Mac OS (including with Tensorflow which, unfortunately, as of this posting, cannot be easily installed on Windows), but few care about building an efficient Windows 10-**native** setup. Most focus on running an Ubuntu VM hosted on Windows or using Docker, unnecessary - and ultimately sub-optimal - steps.
 
@@ -14,7 +14,7 @@ Here's a summary list of the tools and libraries we use for deep learning on Win
 
 1. Visual Studio 2015 Community Edition Update 3 w. Windows Kit 10.0.10240.0
    - Used for its C/C++ compiler (not its IDE) and SDK
-2. Anaconda (64-bit) w. Python 2.7 (Anaconda2-4.2.0)
+2. Anaconda (64-bit) w. Python 2.7 (Anaconda2-4.2.0) or Python 3.5 (Anaconda3-4.2.0)
    - A Python distro that gives us NumPy, SciPy, and other scientific libraries
 3. CUDA 8.0.44 (64-bit)
    - Used for its GPU math libraries, card driver, and CUDA compiler
@@ -68,9 +68,12 @@ Run the downloaded executable to install Visual Studio, using whatever additiona
 
 > Reference Note: We couldn't run any Theano python files until we added the last two env variables above. We would get a `c:\program files (x86)\microsoft visual studio 14.0\vc\include\crtdefs.h(10): fatal error C1083: Cannot open include file: 'corecrt.h': No such file or directory` error at compile time and missing `kernel32.lib uuid.lib ucrt.lib` errors at link time. True, you could probably run `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat` (with proper params) every single time you open a MINGW cmd prompt, but, obviously, none of the sysenv vars would stick from one session to the next.
 
-## Anaconda (64-bit) w. Python 2.7 (Anaconda2-4.2.0)
+## Anaconda (64-bit)
 
-Download Anaconda from [here](https://www.continuum.io/downloads):
+This tutorial was created with Python 2.7, but if you prefer to use Python 3.5 it should work too. 
+> Depending on your installation use `c:\toolkits\anaconda3-4.2.0` instead of `c:\toolkits\anaconda2-4.2.0`.
+
+Download the appropriate Anaconda version from [here](https://www.continuum.io/downloads):
 
 ![](img/anaconda-4.2.0-download-2016-10.png)
 
@@ -404,7 +407,7 @@ $ cd /c/toolkits/keras-1.1.0/examples
 $ python mnist_cnn.py
 ```
 
-> Note: If you get a `cuDNN not available` message after this, try cleaning your `C:\Users\username\AppData\Local\Theano` directory (replace username with your login name). Windows will sometimes also helpfully block foreign .dll files from running on your computer. right click the files and unblock to allow them to be used. 
+> Note: If you get a `cuDNN not available` message after this, try cleaning your `C:\Users\username\AppData\Local\Theano` directory (replace username with your login name). If you get an error similar to `cudnn error: Mixed dnn version. The header is from one version, but we link with a different version (5010, 5005)`, try cuDNN v5.0 instead of cuDNN v5.1. Windows will sometimes also helpfully block foreign `.dll` files from running on your computer. If that is the case, right click and unblock the files to allow them to be used.
 
 Here's the (cleaned up) execution log for the simple convnet Keras example, using cuDNN:
 
@@ -417,6 +420,8 @@ Now, each epoch takes about 3s, instead of 20s, **a large improvement in speed**
 The `Your cuDNN version is more recent than the one Theano officially supports` message certainly sounds ominous but a test accuracy of 0.9899 would suggest that it can be safely ignored. So...
 
 ...we're done!
+
+
 
 # References
 
