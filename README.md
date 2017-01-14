@@ -369,7 +369,7 @@ $ conda list | grep -i keras
 
 ![](img/keras-conda-list-2016-10.png)
 
-Recent builds of Keras can either use Tensorflow or Theano as a backend. At the time of this writing, TensorFlow supports only 64-bit Python 3.5 on Windows. This doesn't work for us, but if you are using Python 3.5, then by all means, feel free to give it a try. By default, we will use Theano as our default backend, using the commands below:
+Recent builds of Keras can either use Tensorflow or Theano as a backend. At the time of this writing, TensorFlow supports only 64-bit Python 3.5 on Windows. This doesn't work for us, but if you are using Python 3.5, then by all means, feel free to give it a try. By default, we will use Theano as our backend, using the commands below:
 
 ```
 $ cp ~/.keras/keras.json ~/.keras/keras.json.bak
