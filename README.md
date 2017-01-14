@@ -369,6 +369,15 @@ $ conda list | grep -i keras
 
 ![](img/keras-conda-list-2016-10.png)
 
+Recent builds of Keras can either use Tensorflow or Theano as a backend. At the time of this writing, TensorFlow supports only 64-bit Python 3.5 on Windows. Thus doesn't work for us, but if you are using Python 3.5, then by all means, feel free to give it a try. By default, we will use Theano as our default backend, using the commands below:
+
+```
+$ cp ~/.keras/keras.json ~/.keras/keras.json.bak
+$ echo -e '{\n\t"image_dim_ordering": "th",\n\t"epsilon": 1e-07,\n\t"floatx": "float32",\n\t"backend": "theano"\n}' >> ~/.keras/keras_theano.json
+$ echo -e '{\n\t"image_dim_ordering": "tf",\n\t"epsilon": 1e-07,\n\t"floatx": "float32",\n\t"backend": "tensorflow"\n}' >> ~/.keras/keras_tensorflow.json
+$ cp -f ~/.keras/keras_theano.json ~/.keras/keras.json
+```
+
 ## Validating our GPU install with Keras
 
 We can train a simple convnet ([convolutional neural network](https://en.wikipedia.org/wiki/Convolutional_neural_network)) on the [MNIST dataset](https://en.wikipedia.org/wiki/MNIST_database#Dataset) by using one of the example scripts provided with Keras. The file is called `mnist_cnn.py` and can be found in the `examples` folder:
