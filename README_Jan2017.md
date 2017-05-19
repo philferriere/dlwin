@@ -1,49 +1,46 @@
-GPU-accelerated Theano or Tensorflow with Keras on Windows 10 native
+GPU-accelerated Theano & Keras on Windows 10 native
 ===================================================
 
-There are certainly a lot of guides to assist you build great deep learning (DL)
-setups on Linux or Mac OS, but few care about building an efficient Windows 10-**native** setup. Most focus on running an Ubuntu VM hosted on Windows or using Docker, unnecessary - and ultimately sub-optimal - steps.
+**>> LAST UPDATED JANUARY, 2017 <<**
 
-We also found enough misguiding/deprecated information out there to make it 
-worthwhile putting together a step-by-step guide for the latest stable versions of Tensorflow and Keras. Used together, they make for one of the simplest and fastest DL configurations to work natively on Windows.
+There are certainly a lot of guides to assist you build great deep learning (DL) setups on Linux or Mac OS (including with Tensorflow which, unfortunately, as of this posting, cannot be easily installed on Windows), but few care about building an efficient Windows 10-**native** setup. Most focus on running an Ubuntu VM hosted on Windows or using Docker, unnecessary - and ultimately sub-optimal - steps.
+
+We also found enough misguiding/deprecated information out there to make it worthwhile putting together a step-by-step guide for the latest stable versions of Theano and Keras. Used together, they make for one of the simplest and fastest DL configurations to work natively on Windows.
 
 If you **must** run your DL setup on Windows 10, then the information contained here may be useful to you.
-
-This tutorial is an extension of [Phil Ferrier's step-by-step guide for Theano and Keras on Windows 10 native](https://github.com/philferriere/dlwin).
 
 # Dependencies
 Here's a summary list of the tools and libraries we use for deep learning on Windows 10 (Version 1607 OS Build 14393.222):
 
 1. Visual Studio 2015 Community Edition Update 3 w. Windows Kit 10.0.10240.0
    - Used for its C/C++ compiler (not its IDE) and SDK
-2. Anaconda (64-bit) w. Python 3.5 (Anaconda3-4.2.0)
+2. Anaconda (64-bit) w. Python 2.7 (Anaconda2-4.2.0) or Python 3.5 (Anaconda3-4.2.0)
    - A Python distro that gives us NumPy, SciPy, and other scientific libraries
-3. CUDA 8.0.61 (64-bit)
+3. CUDA 8.0.44 (64-bit)
    - Used for its GPU math libraries, card driver, and CUDA compiler
-4. cuDNN v5.1 (August 10, 2016) for CUDA 8.0 (Conditional)
-   - Used to run vastly faster convolution neural networks
-5. MinGW-w64 (5.4.0)
+4. MinGW-w64 (5.4.0)
    - Used for its Unix-like compiler and build tools (g++/gcc, make...) for Windows
-6. Theano 0.8.2
+5. Theano 0.8.2
    - Used to evaluate mathematical expressions on multi-dimensional arrays
-7. Tensorflow 1.1.0
-   - Used to evaluate mathematical expressions on multi-dimensional arrays
-8. Keras 2.0.4
-   - Used for deep learning on top of Tensorflow
+6. Keras 1.1.0
+   - Used for deep learning on top of Theano
+7. OpenBLAS 0.2.14 (Optional)
+   - Used for its CPU-optimized implementation of many linear algebra operations
+8. cuDNN v5.1 (August 10, 2016) for CUDA 8.0 (Conditional)
+   - Used to run vastly faster convolution neural networks
+
+For an older setup using VS2013 and CUDA 7.5, please refer to [README-2016-07.md](README-2016-07.md) (July, 2016 setup)
 
 # Hardware
 
-1. Custom PC, 16GB RAM
-   - Intel i7 4771 @ 3.5 GHz (1 processor, 4 cores total, 8 logical processors)
-2. NVIDIA GeForce GTX 1080 Ti, 11GB RAM
-   - Driver version: 382.05 / Win 10 x64
+1. Dell Precision T7900, 64GB RAM
+   - Intel Xeon E5-2630 v4 @ 2.20 GHz (1 processor, 10 cores total, 20 logical processors)
+2. NVIDIA GeForce Titan X, 12GB RAM
+   - Driver version: 372.90 / Win 10 64
 
 # Installation steps
 
-We like to keep our toolkits and libraries in a single root folder boringly called 
-`C:\Programming`, so whenever you see a Windows path that starts with `C:\Programming` below, 
-make sure to replace it with whatever you decide your own toolkit drive and folder 
-ought to be.
+We like to keep our toolkits and libraries in a single root folder boringly called `c:\toolkits`, so whenever you see a Windows path that starts with `c:\toolkits` below, make sure to replace it with whatever you decide your own toolkit drive and folder ought to be.
 
 ## Visual Studio 2015 Community Edition Update 3 w. Windows Kit 10.0.10240.0
 
@@ -73,35 +70,35 @@ Run the downloaded executable to install Visual Studio, using whatever additiona
 
 ## Anaconda (64-bit)
 
-Download the appropriate Anaconda version from [here](https://www.continuum.io/downloads), 
-note that you have to browse the Anaconda installer archive for version 4.2.0:
+This tutorial was created with Python 2.7, but if you prefer to use Python 3.5 it should work too. 
+> Depending on your installation use `c:\toolkits\anaconda3-4.2.0` instead of `c:\toolkits\anaconda2-4.2.0`.
+
+Download the appropriate Anaconda version from [here](https://www.continuum.io/downloads):
 
 ![](img/anaconda-4.2.0-download-2016-10.png)
 
-Run the downloaded executable to install Anaconda in `C:\Programming\Anaconda3-4.2.0`:
+Run the downloaded executable to install Anaconda in `c:\toolkits\anaconda2-4.2.0`:
 
-REPLACE -----> ![](img/anaconda-4.2.0-setup1-2016-10.png)
+![](img/anaconda-4.2.0-setup1-2016-10.png)
 
-> Warning: Below, we enabled `Register Anaconda as the system Python 3.5` because it works for us, but that may not be the best option for you!
+> Warning: Below, we enabled `Register Anaconda as the system Python 2.7` because it works for us, but that may not be the best option for you!
 
-REPLACE -----> ![](img/anaconda-4.2.0-setup2-2016-10.png)
+![](img/anaconda-4.2.0-setup2-2016-10.png)
 
-The installation should create the environment variables automatically if you chose to.
-Otherwise make sure that the following variables are defined:
-
-1. Define sysenv variable `PYTHON_HOME` with the value `C:\Programming\Anaconda3-4.2.0`
+1. Define sysenv variable `PYTHON_HOME` with the value `c:\toolkits\anaconda2-4.2.0`
 2. Add `%PYTHON_HOME%`, `%PYTHON_HOME%\Scripts`, and `%PYTHON_HOME%\Library\bin` to `PATH`
 
 After anaconda installation open a command prompt and execute:
 
 ```
-> cd %PYTHON_HOME% 
-> conda install libpython
+$ cd $PYTHON_HOME; conda install libpython
 ```
 
-REPLACE -----> ![](img/anaconda-4.2.0-libpython-2016-10.png)
+![](img/anaconda-4.2.0-libpython-2016-10.png)
 
-## CUDA 8.0.61 (64-bit)
+> Note: The version of MinGW above is old (gcc 4.7.0). Instead, we will use MinGW 5.4.0, as shown below.
+
+## CUDA 8.0.44 (64-bit)
 Download CUDA 8.0 (64-bit) from the [NVidia website] (https://developer.nvidia.com/cuda-downloads)
 
 Select the proper target platform:
@@ -112,7 +109,7 @@ Download the installer:
 
 ![](img/cuda8-downloads-win10b-2016-10.png)
 
-Run the downloaded installer. Install the files in `C:\Programming\cuda-8.0.61`:
+Run the downloaded installer. Install the files in `c:\toolkits\cuda-8.0.44`:
 
 ![](img/cuda8-install-part1-2016-10.png)
 
@@ -124,12 +121,9 @@ Run the downloaded installer. Install the files in `C:\Programming\cuda-8.0.61`:
 
 ![](img/cuda8-install-part5-2016-10.png)
 
-After completion, the installer should have created a system environment (sysenv) 
-variable named `CUDA_PATH` and added `%CUDA_PATH%\bin` as well 
-as`%CUDA_PATH%\libnvvp` to `PATH`. Check that it is indeed the case. 
-If, for some reason, the CUDA env vars are missing, then:
+After completion, the installer should have created a system environment (sysenv) variable named `CUDA_PATH` and added `%CUDA_PATH%\bin` as well as`%CUDA_PATH%\libnvvp` to `PATH`. Check that it is indeed the case. If, for some reason, the CUDA env vars are missing, then:
 
-1. Define a system environment (sysenv) variable named `CUDA_PATH` with the value `C:\Programming\cuda-8.0.61`
+1. Define a system environment (sysenv) variable named `CUDA_PATH` with the value `c:\toolkits\cuda-8.0.44`
 2. Add`%CUDA_PATH%\libnvvp` and `%CUDA_PATH%\bin` to `PATH`
 
 ## MinGW-w64 (5.4.0)
@@ -197,7 +191,7 @@ $ pip install git+https://github.com/Theano/Theano.git@rel-0.8.2
 ```
 In our case, this resulted in conflicts between 32-bit and 64-bit DLL when trying to run Theano code.
 
-## OpenBLAS 0.2.19 (Optional)
+## OpenBLAS 0.2.14 (Optional)
 
 If we're going to use the GPU, why install a CPU-optimized linear algebra library? With our setup, most of the deep learning grunt work is performed by the GPU, that is correct, but *the CPU isn't idle*. An important part of image-based Kaggle competitions is **data augmentation**. In that context, data augmentation is the process of manufacturing additional input samples (more training images) by transformation of the original training samples, via the use of image processing operators. Basic transformations such as downsampling and (mean-centered) normalization are also needed. If you feel adventurous, you'll want to try additional pre-processing enhancements (noise removal, histogram equalization, etc.). You certainly could use the GPU for that purpose and save the results to file. In practice, however, those operations are often executed **in parallel on the CPU** while the GPU is busy learning the weights of the deep neural network and the augmented data discarded after use. For this reason, we *highly recommend* installing the OpenBLAS library.
 
@@ -205,7 +199,7 @@ According to the Theano [documentation](http://deeplearning.net/software/theano_
 
 Download OpenBLAS from [here](https://sourceforge.net/projects/openblas/files/v0.2.14/OpenBLAS-v0.2.14-Win64-int32.zip/download) and extract the files to `c:\toolkits\openblas-0.2.14-int32`
 
-1. Define sysenv variable `OPENBLAS_HOME` with the value `C:\Programming\OpenBLAS-v0.2.19-Win64-int32`
+1. Define sysenv variable `OPENBLAS_HOME` with the value `c:\toolkits\openblas-0.2.14-int32`
 2. Add `%OPENBLAS_HOME%\bin` to `PATH`
 
 ## Switching between CPU and GPU mode
@@ -214,11 +208,11 @@ Next, create the two following sysenv variables:
 
 - sysenv variable `THEANO_FLAGS_CPU` with the value:
 
-`floatX=float32,device=cpu,lib.cnmem=0.8,blas.ldflags=-LC:/Programming/OpenBLAS-v0.2.19-Win64-int32/bin -lopenblas`
+`floatX=float32,device=cpu,lib.cnmem=0.8,blas.ldflags=-LC:/toolkits/openblas-0.2.14-int32/bin -lopenblas`
 
 - sysenv variable `THEANO_FLAGS_GPU` with the value:
 
-`floatX=float32,device=gpu,dnn.enabled=False,lib.cnmem=0.8,blas.ldflags=-LC:/Programming/OpenBLAS-v0.2.19-Win64-int32/bin -lopenblas`
+`floatX=float32,device=gpu,dnn.enabled=False,lib.cnmem=0.8,blas.ldflags=-LC:/toolkits/openblas-0.2.14-int32/bin -lopenblas`
 
 Theano only cares about the value of the sysenv variable named `THEANO_FLAGS`. All we need to do to tell Theano to use the CPU or GPU is to set `THEANO_FLAGS` to either `THEANO_FLAGS_CPU` or `THEANO_FLAGS_GPU`. You can verify those variables have been successfully added to your environment with the following command:
 
@@ -400,7 +394,7 @@ Without cuDNN, each epoch takes about 20s. If you install [TechPowerUp's GPU-Z](
 
 ![](img/mnist_cnn_gpu_usage-2016-10.png)
 
-## cuDNN v5 (August 10, 2016) for CUDA 8.0 (Conditional)
+## cuDNN v5.1 (August 10, 2016) for CUDA 8.0 (Conditional)
 
 If you're not going to train convnets then you might not really benefit from installing cuDNN. Per NVidia's [website](https://developer.nvidia.com/cudnn), "cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers," hallmarks of convolution network architectures. Theano is mentioned in the list of [frameworks that support cuDNN v5](https://developer.nvidia.com/deep-learning-frameworks) for GPU acceleration.
 
@@ -408,11 +402,11 @@ If you are going to train convnets, then download cuDNN from [here](https://deve
 
 ![](img/cudnn-download-2016-10.png)
 
-The downloaded ZIP file contains three directories (`bin`, `include`, `lib`). Extract those directories and copy the files they contain to the identically named folders in `C:\Programming\cuda-8.0.61`.
+The downloaded ZIP file contains three directories (`bin`, `include`, `lib`). Extract those directories and copy the files they contain to the identically named folders in `C:\toolkits\cuda-8.0.44`.
 
 To enable cuDNN, create a new sysenv variable named `THEANO_FLAGS_GPU_DNN` with the following value:
 
-`floatX=float32,device=gpu,optimizer_including=cudnn,lib.cnmem=0.8,dnn.conv.algo_bwd_filter=deterministic,dnn.conv.algo_bwd_data=deterministic,blas.ldflags=-LC:/Programming/OpenBLAS-v0.2.19-Win64-int32/bin -lopenblas`
+`floatX=float32,device=gpu,optimizer_including=cudnn,lib.cnmem=0.8,dnn.conv.algo_bwd_filter=deterministic,dnn.conv.algo_bwd_data=deterministic,blas.ldflags=-LC:/toolkits/openblas-0.2.14-int32/bin -lopenblas`
 
 Then, run the following commands:
 
