@@ -9,7 +9,7 @@ We also found enough misguiding/deprecated information out there to make it wort
 
 If you **must** run your DL setup on Windows 10, then the information contained here may be useful to you.
 
-For the old installation instructions from January 2017, check-out [this readme](README_Jan2015.md). 
+For the old installation instructions from January 2017, check-out [this readme](README_Jan2017.md). 
 
 # Dependencies
 Here's a summary list of the tools and libraries we use for deep learning on Windows 10 (Version 1607 OS Build 14393.222):
