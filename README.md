@@ -172,11 +172,24 @@ you still end up with different results when you shouldn't.
 For this reason alone, we highly recommend only using point releases, the same one across machines, 
 and always documenting which one you use if you can't just use a setup script.
 
+The following command will install Keras and Theano inside of your Python distribution 
+
 ```
 $ pip install keras==2.0.4
 ```
 
-This will install Keras and Theano inside of your Python distribution 
+Verify Keras was installed by querying Anaconda for the list of installed packages:
+
+```
+$ conda list | grep -i keras
+```
+or
+```
+PS> conda list | sls Keras
+```
+
+![](img/keras_conda_list_2017.png)
+
 
 ### Get the source for Keras
 
@@ -191,18 +204,7 @@ $ git clone https://github.com/fchollet/keras.git keras-2.0.4 --branch 2.0.4
 
 This should clone Keras 2.0.4 in `c:\toolkits\keras-2.0.4`:
 
-Verify Keras was installed by querying Anaconda for the list of installed packages:
-
-```
-$ conda list | grep -i keras
-```
-
-![](img/keras-conda-list-2016-10.png)
-
-
 ## OpenBLAS 0.2.19 (Optional)
-
-> Note that the [documentation](http://deeplearning.net/software/theano_versions/dev/install_windows.html#install-windows) was updated an now recommends MKL-Service, so all OpenBLAS steps might be skipped.
 
 If we're going to use the GPU, why install a CPU-optimized linear algebra library? With our setup, most of the deep learning grunt work is performed by the GPU, that is correct, but *the CPU isn't idle*. An important part of image-based Kaggle competitions is **data augmentation**. In that context, data augmentation is the process of manufacturing additional input samples (more training images) by transformation of the original training samples, via the use of image processing operators. Basic transformations such as downsampling and (mean-centered) normalization are also needed. If you feel adventurous, you'll want to try additional pre-processing enhancements (noise removal, histogram equalization, etc.). You certainly could use the GPU for that purpose and save the results to file. In practice, however, those operations are often executed **in parallel on the CPU** while the GPU is busy learning the weights of the deep neural network and the augmented data discarded after use. For this reason, we *highly recommend* installing the OpenBLAS library.
 
@@ -214,6 +216,8 @@ Download OpenBLAS from [here](https://sourceforge.net/projects/openblas/files/v0
 2. Add `%OPENBLAS_HOME%\bin` to `PATH`
 
 ### MKL-Service
+
+> Note that the [documentation](http://deeplearning.net/software/theano_versions/dev/install_windows.html#install-windows) was updated an now recommends MKL-Service, so the OpenBLAS steps might be skipped and parameters indicating OpenBLAS might be ommitted (so `floatX=float32,device=cpu,lib.cnmem=0.8,blas.ldflags=-LC:/toolkits/openblas-0.2.19/bin -lopenblas` becomes `floatX=float32,device=cpu,lib.cnmem=0.8`).
 
 Install the MKL-Service library which provides an alternative to OpenBLAS via conda
 
@@ -408,7 +412,7 @@ The `Your cuDNN version is more recent than the one Theano officially supports` 
 
 ## Installing Tensorflow and switching backend
 
-Tensorflow finally supports windows and if so far everything worked out fine for you, you may try to switch to Tensorflow and see if it performs as well. Run the following command to install the GPU-optimized version of tensorflow.
+Tensorflow finally supports windows (but only Python 3.5 with x64) and if everything worked out fine for you this far, you may now try to switch to Tensorflow and see if it performs equally well or even better. Run the following command to install the GPU-optimized version of tensorflow.
 
 `$ pip install tensorflow-gpu==1.1.0`
 
@@ -422,7 +426,7 @@ When running the MNIST-dataset example again, we should get similar or potential
 
 ![](img/tensorflow_mnist.png)
 
-The warnings at the beginning are annoying, but so far there is [no supported way](https://www.tensorflow.org/install/install_sources) of building Tensorflow on Windows with those optimizations, so we have to stay put.
+The warnings at the beginning are annoying, but so far there is [no supported way](https://www.tensorflow.org/install/install_sources) of building Tensorflow on Windows with those optimizations, so we have to stay put and simply ignore them. Hopefully that will be [fixed](https://github.com/tensorflow/tensorflow/issues/7778) [soon](https://github.com/tensorflow/tensorflow/issues/7257) so people don't have to [build Tensorflow](https://stackoverflow.com/questions/42603407/how-to-compile-tensor-flow-with-sse-and-and-avx-instructions-on-windows/42755665#42755665) for [themselves](https://github.com/yaroslavvb/tensorflow-community-wheels).
 
 # References
 
