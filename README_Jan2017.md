@@ -1,7 +1,7 @@
 GPU-accelerated Theano & Keras on Windows 10 native
 ===================================================
 
-**>> NO LONGER MAINTAINED, PLEASE USE THE LATEST VERSION <<**
+**>> LAST UPDATED JANUARY, 2017 <<**
 
 There are certainly a lot of guides to assist you build great deep learning (DL) setups on Linux or Mac OS (including with Tensorflow which, unfortunately, as of this posting, cannot be easily installed on Windows), but few care about building an efficient Windows 10-**native** setup. Most focus on running an Ubuntu VM hosted on Windows or using Docker, unnecessary - and ultimately sub-optimal - steps.
 
@@ -10,145 +10,172 @@ We also found enough misguiding/deprecated information out there to make it wort
 If you **must** run your DL setup on Windows 10, then the information contained here may be useful to you.
 
 # Dependencies
-Here's a summary list of the tools and libraries we use for deep learning on Windows 10:
+Here's a summary list of the tools and libraries we use for deep learning on Windows 10 (Version 1607 OS Build 14393.222):
 
-1. Visual Studio 2013 Community Edition Update 4
-   - Used for its C/C++ compiler (not its IDE)
-2. CUDA 7.5.18 (64-bit)
-   - Used for its GPU math libraries, card driver, and CUDA compiler
-3. MinGW-w64 (5.3.0)
-   - Used for its Unix-like compiler and build tools (g++/gcc, make...) for Windows
-4. Anaconda (64-bit) w. Python 2.7 (Anaconda2-4.1.0)
+1. Visual Studio 2015 Community Edition Update 3 w. Windows Kit 10.0.10240.0
+   - Used for its C/C++ compiler (not its IDE) and SDK
+2. Anaconda (64-bit) w. Python 2.7 (Anaconda2-4.2.0) or Python 3.5 (Anaconda3-4.2.0)
    - A Python distro that gives us NumPy, SciPy, and other scientific libraries
+3. CUDA 8.0.44 (64-bit)
+   - Used for its GPU math libraries, card driver, and CUDA compiler
+4. MinGW-w64 (5.4.0)
+   - Used for its Unix-like compiler and build tools (g++/gcc, make...) for Windows
 5. Theano 0.8.2
    - Used to evaluate mathematical expressions on multi-dimensional arrays
-6. Keras 1.0.5
+6. Keras 1.1.0
    - Used for deep learning on top of Theano
 7. OpenBLAS 0.2.14 (Optional)
    - Used for its CPU-optimized implementation of many linear algebra operations
-8. cuDNN v5 (Conditional)
+8. cuDNN v5.1 (August 10, 2016) for CUDA 8.0 (Conditional)
    - Used to run vastly faster convolution neural networks
+
+For an older setup using VS2013 and CUDA 7.5, please refer to [README-2016-07.md](README-2016-07.md) (July, 2016 setup)
 
 # Hardware
 
-1. Dell Precision T7500, 96GB RAM
-   - Intel Xeon E5605 @ 2.13 GHz (2 processors, 8 cores total)
+1. Dell Precision T7900, 64GB RAM
+   - Intel Xeon E5-2630 v4 @ 2.20 GHz (1 processor, 10 cores total, 20 logical processors)
 2. NVIDIA GeForce Titan X, 12GB RAM
-   - Driver version: 10.18.13.5390 Beta (ForceWare 353.90) / Win 10 64
+   - Driver version: 372.90 / Win 10 64
 
 # Installation steps
 
 We like to keep our toolkits and libraries in a single root folder boringly called `c:\toolkits`, so whenever you see a Windows path that starts with `c:\toolkits` below, make sure to replace it with whatever you decide your own toolkit drive and folder ought to be.
 
-## Visual Studio 2013 Community Edition Update 4
+## Visual Studio 2015 Community Edition Update 3 w. Windows Kit 10.0.10240.0
 
-<s>You can download Visual Studio 2013 Community Edition from [here](https://www.visualstudio.com/en-us/news/vs2013-community-vs.aspx).</s>
+You can download Visual Studio 2015 Community Edition from [here](https://www.microsoft.com/en-us/download/details.aspx?id=48146):
 
-**>>> EDIT (October 2016)**
+![](img/vs2015-download-part1-2016-10.png)
 
-Per [valtron](https://github.com/valtron): It's no longer possible to link directly to VS2013. Instead, one has to:
+Select the executable and let it decide what to download on its own:
 
-1. Go to https://www.visualstudio.com/vs/older-downloads/
-2. "Already a member? Sign in"
-3. Use http://bugmenot.com/view/microsoftonline.com if you don't have an account
-4. Go to https://my.visualstudio.com/downloads
-5. Ctrl+F "Visual Studio Express 2013 for Windows with Update 4"
+![](img/vs2015-download-part2-2016-10.png)
 
-**<<< EDIT**
+Run the downloaded executable to install Visual Studio, using whatever additional config settings work best for you:
 
-Yes, we're aware there's a Visual Studio 2015 Community Edition, and it is also installed on our system, **BUT** the CUDA 7.5 toolkit won't even attempt to use it, as shown below:
+![](img/vs2015-install-part1-2016-10.png)
 
-![](img/cuda-needs-vs2013.png)
+![](img/vs2015-install-part2-2016-10.png)
 
-So make sure to install VS 2013, if you haven't already. Then, add `C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin` to your `PATH`, based on where you installed VS 2013.
+![](img/vs2015-install-part3b-2016-10.png)
 
-## CUDA 7.5.18 (64-bit)
-Download CUDA 7.5 (64-bit) from the [NVidia website] (https://developer.nvidia.com/cuda-downloads)
+![](img/vs2015-install-part4b-2016-10.png)
+
+1. Add `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin` to your `PATH`, based on where you installed VS 2015.
+2. Define sysenv variable `INCLUDE` with the value `C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt`
+3. Define sysenv variable `LIB` with the value `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10240.0\um\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10240.0\ucrt\x64`
+
+> Reference Note: We couldn't run any Theano python files until we added the last two env variables above. We would get a `c:\program files (x86)\microsoft visual studio 14.0\vc\include\crtdefs.h(10): fatal error C1083: Cannot open include file: 'corecrt.h': No such file or directory` error at compile time and missing `kernel32.lib uuid.lib ucrt.lib` errors at link time. True, you could probably run `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat` (with proper params) every single time you open a MINGW cmd prompt, but, obviously, none of the sysenv vars would stick from one session to the next.
+
+## Anaconda (64-bit)
+
+This tutorial was created with Python 2.7, but if you prefer to use Python 3.5 it should work too. 
+> Depending on your installation use `c:\toolkits\anaconda3-4.2.0` instead of `c:\toolkits\anaconda2-4.2.0`.
+
+Download the appropriate Anaconda version from [here](https://www.continuum.io/downloads):
+
+![](img/anaconda-4.2.0-download-2016-10.png)
+
+Run the downloaded executable to install Anaconda in `c:\toolkits\anaconda2-4.2.0`:
+
+![](img/anaconda-4.2.0-setup1-2016-10.png)
+
+> Warning: Below, we enabled `Register Anaconda as the system Python 2.7` because it works for us, but that may not be the best option for you!
+
+![](img/anaconda-4.2.0-setup2-2016-10.png)
+
+1. Define sysenv variable `PYTHON_HOME` with the value `c:\toolkits\anaconda2-4.2.0`
+2. Add `%PYTHON_HOME%`, `%PYTHON_HOME%\Scripts`, and `%PYTHON_HOME%\Library\bin` to `PATH`
+
+After anaconda installation open a command prompt and execute:
+
+```
+$ cd $PYTHON_HOME; conda install libpython
+```
+
+![](img/anaconda-4.2.0-libpython-2016-10.png)
+
+> Note: The version of MinGW above is old (gcc 4.7.0). Instead, we will use MinGW 5.4.0, as shown below.
+
+## CUDA 8.0.44 (64-bit)
+Download CUDA 8.0 (64-bit) from the [NVidia website] (https://developer.nvidia.com/cuda-downloads)
 
 Select the proper target platform:
 
-![](img/cuda-downloads-win10a.png)
+![](img/cuda8-downloads-win10a-2016-10.png)
 
 Download the installer:
 
-![](img/cuda-downloads-win10b.png)
+![](img/cuda8-downloads-win10b-2016-10.png)
 
-Run the installer. In our case (a fluke?) the installer didn't allow us to choose where to install its files. It installed in `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5`. Once it has done so, move the files from there to `c:\toolkits\cuda-7.5.18` and update `PATH` as follows:
+Run the downloaded installer. Install the files in `c:\toolkits\cuda-8.0.44`:
 
-1. Define a system environment (sysenv) variable named `CUDA_HOME` with the value `c:\toolkits\cuda-7.5.18`
-2. Add`%CUDA_HOME%\libnwp` and `%CUDA_HOME%\bin` to `PATH`
+![](img/cuda8-install-part1-2016-10.png)
 
-## MinGW-w64 (5.3.0)
+![](img/cuda8-install-part2-2016-10.png)
 
-Download MinGW-w64 from [here](https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/):
+![](img/cuda8-install-part3-2016-10.png)
 
-![](img/mingw-download.png)
+![](img/cuda8-install-part4-2016-10.png)
 
-Install it to `c:\toolkits\mingw-w64-5.3.0` with the following settings (second wizard screen):
+![](img/cuda8-install-part5-2016-10.png)
 
-![](img/mingw-setup2.png)
+After completion, the installer should have created a system environment (sysenv) variable named `CUDA_PATH` and added `%CUDA_PATH%\bin` as well as`%CUDA_PATH%\libnvvp` to `PATH`. Check that it is indeed the case. If, for some reason, the CUDA env vars are missing, then:
 
-1. Define the sysenv variable `MINGW_HOME` with the value `c:\toolkits\mingw-w64-5.3.0`
+1. Define a system environment (sysenv) variable named `CUDA_PATH` with the value `c:\toolkits\cuda-8.0.44`
+2. Add`%CUDA_PATH%\libnvvp` and `%CUDA_PATH%\bin` to `PATH`
+
+## MinGW-w64 (5.4.0)
+
+Download MinGW-w64 from [here](https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/):
+
+![](img/mingw-download-6.2.0-2016-10.png)
+
+Install it to `c:\toolkits\mingw-w64-5.4.0` with the following settings (second wizard screen):
+
+![](img/mingw-install-5.4.0-part1-2016-10.png)
+
+![](img/mingw-install-5.4.0-part2-2016-10.png)
+
+
+1. Define the sysenv variable `MINGW_HOME` with the value `c:\toolkits\mingw-w64-5.4.0`
 2. Add `%MINGW_HOME%\mingw64\bin` to `PATH`
 
 Run the following to make sure all necessary build tools can be found:
 
 ```
-$ where gcc; where cl; where nvcc; where cudafe; where cudafe++
+$ where gcc; where g++; where cl; where nvcc; where cudafe; where cudafe++
+$ gcc --version; g++ --version
+$ cl
+$ nvcc --version; cudafe --version; cudafe++ --version
 ```
 
 You should get results similar to:
 
-![](img/build-tools.png)
-
-## Anaconda (64-bit) w. Python 2.7 (Anaconda2-4.1.0)
-
-Download Anaconda from [here](https://www.continuum.io/downloads) and install it to `c:\toolkits\anaconda2-4.1.0`:
-
-![](img/anaconda-setup1.png)
-
-> Warning: Below, we enabled `Register Anaconda as the system Python 2.7` because it works for us, but that may not be the best option for you!
-
-![](img/anaconda-setup2.png)
-
-
-1. Define sysenv variable `PYTHON_HOME` with the value `c:\toolkits\anaconda2-4.1.0`
-2. Add `%PYTHON_HOME%`, `%PYTHON_HOME%\Scripts`, and `%PYTHON_HOME%\Library\bin` to `PATH`
-
-After anaconda installation open a MINGW64 command prompt and execute:
-
-```
-$ cd $PYTHON_HOME
-$ conda install libpython
-```
-
-![](img/libpython.png)
+![](img/build-tools-cuda8-2016-10.png)
 
 ## Theano 0.8.2
 
 Version 0.8.2? Why not just install the latest bleeding-edge version of Theano since it obviously must work better, right? Simply put, because it makes [reproducible research](https://www.coursera.org/learn/reproducible-research) harder. If your work colleagues or Kaggle teammates install the latest code from the dev branch at a different time than you did, you will most likely be running different code bases on your machines, increasing the odds that even though you're using the same input data (the same random seeds, etc.), you still end up with different results when you shouldn't. For this reason alone, we highly recommend only using point releases, the same one across machines, and always documenting which one you use if you can't just use a setup script.
 
-Clone a stable Theano release (0.8.2) to your local machine from GitHub using the following commands:
+Clone a stable Theano release (0.8.2) from GitHub into `c:\toolkits\theano-0.8.2` using the following commands:
 
 ```
 $ cd /c/toolkits
 $ git clone https://github.com/Theano/Theano.git theano-0.8.2 --branch rel-0.8.2
 ```
 
-![](img/git-theano.png)
+![](img/theano-git-2016-10.png)
 
-This should clone Theano 0.8.2 in `c:\toolkits\theano-0.8.2`:
-
-![](img/dir-theano.png)
-
-Install it as follows:
+Install Theano as follows:
 
 ```
 $ cd /c/toolkits/theano-0.8.2
 $ python setup.py install --record installed_files.txt
 ```
 
-The list of files installed can be found [here](https://dl.dropboxusercontent.com/u/5888080/installed_files.txt)
+The list of files installed can be found [here](installed_files/theano-0.8.2_installed_files.txt)
 
 Verify Theano was installed by querying Anaconda for the list of installed packages:
 
@@ -156,7 +183,13 @@ Verify Theano was installed by querying Anaconda for the list of installed packa
 $ conda list | grep -i theano
 ```
 
-![](img/conda-list-theano.png)
+![](img/theano-conda-list-2016-10.png)
+
+> Note: We also tried installing Theano with the following command:
+```
+$ pip install git+https://github.com/Theano/Theano.git@rel-0.8.2
+```
+In our case, this resulted in conflicts between 32-bit and 64-bit DLL when trying to run Theano code.
 
 ## OpenBLAS 0.2.14 (Optional)
 
@@ -187,9 +220,8 @@ Theano only cares about the value of the sysenv variable named `THEANO_FLAGS`. A
 $ env | grep -i theano
 ```
 
-![](img/env-theano.png)
+![](img/theano-env-2016-10.png)
 
-> Note: See the cuDNN section below for information about the `THEANO_FLAGS_GPU_DNN` flag
 
 ## Validating our OpenBLAS install (Optional)
 
@@ -224,9 +256,35 @@ $ THEANO_FLAGS=$THEANO_FLAGS_CPU
 $ python openblas_test.py
 ```
 
-![](img/openblas_test.png)
+![](img/openblas_test-2016-10.png)
 
 > Note: If you get a failure of the kind `NameError: global name 'CVM' is not defined`, it may be because, like us, you've messed with the value of `THEANO_FLAGS_CPU` and switched back and forth between `floatX=float32` and `floatX=float64` several times. Cleaning your `C:\Users\username\AppData\Local\Theano` directory (replace username with your login name) will fix the problem (See [here](https://groups.google.com/forum/#!msg/theano-users/JoTu61_MTLk/4ZzsVyaOf2kJ), for reference)
+
+## Checking our PATH sysenv var
+
+At this point, the `PATH` environment variable should look something like:
+
+```
+%MINGW_HOME%\mingw64\bin;
+%CUDA_PATH%\bin;
+%CUDA_PATH%\libnvvp;
+%OPENBLAS_HOME%\bin;
+%PYTHON_HOME%;
+%PYTHON_HOME%\Scripts;
+%PYTHON_HOME%\Library\bin;
+C:\ProgramData\Oracle\Java\javapath;
+C:\WINDOWS\system32;
+C:\WINDOWS;
+C:\WINDOWS\System32\Wbem;
+C:\WINDOWS\System32\WindowsPowerShell\v1.0\;
+C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin;
+C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;
+C:\Program Files\Git\cmd;
+C:\Program Files\Git\mingw64\bin;
+C:\Program Files\Git\usr\bin
+...
+```
 
 ## Validating our GPU install with Theano
 
@@ -264,7 +322,7 @@ $ THEANO_FLAGS=$THEANO_FLAGS_CPU
 $ python cpu_gpu_test.py
 ```
 
-![](img/cpu_test.png)
+![](img/theano-cpu_test-2016-10.png)
 
 Next, let's run the same program on the GPU:
 
@@ -273,33 +331,35 @@ $ THEANO_FLAGS=$THEANO_FLAGS_GPU
 $ python cpu_gpu_test.py
 ```
 
-![](img/gpu_test.png)
+> Note: If you get a `c:\program files (x86)\microsoft visual studio 14.0\vc\include\crtdefs.h(10): fatal error C1083: Cannot open include file: 'corecrt.h': No such file or directory` with the above, please see the Reference Note at the end of the `Visual Studio 2015 Community Edition Update 3` section.
 
-Almost **a 26:1 improvement**. It works! Great, we're done with setting up Theano 0.8.2.
+![](img/theano-gpu_test-2016-10.png)
 
-## Keras 1.0.5
+Almost **a 68:1 improvement**. It works! Great, we're done with setting up Theano 0.8.2.
 
-Clone a stable Keras release (1.0.5) to your local machine from GitHub using the following commands:
+## Keras 1.1.0
+
+Clone a stable Keras release (1.1.0) to your local machine from GitHub using the following commands:
 
 ```
 $ cd /c/toolkits
-$ git clone https://github.com/fchollet/keras.git keras-1.0.5 --branch 1.0.5
+$ git clone https://github.com/fchollet/keras.git keras-1.1.0 --branch 1.1.0
 ```
 
-![](img/git-keras.png)
+![](img/keras-git-2016-10.png)
 
-This should clone Keras 1.0.5 in `c:\toolkits\keras-1.0.5`:
+This should clone Keras 1.1.0 in `c:\toolkits\keras-1.1.0`:
 
-![](img/dir-keras.png)
+![](img/keras-dir-2016-10.png)
 
 Install it as follows:
 
 ```
-$ cd /c/toolkits/keras-1.0.5
+$ cd /c/toolkits/keras-1.1.0
 $ python setup.py install --record installed_files.txt
 ```
 
-The list of files installed can be found [here](https://dl.dropboxusercontent.com/u/5888080/installed_files2.txt)
+The list of files installed can be found [here](installed_files/keras-1.1.0_installed_files.txt)
 
 Verify Keras was installed by querying Anaconda for the list of installed packages:
 
@@ -307,32 +367,42 @@ Verify Keras was installed by querying Anaconda for the list of installed packag
 $ conda list | grep -i keras
 ```
 
-![](img/conda-list-keras.png)
+![](img/keras-conda-list-2016-10.png)
+
+Recent builds of Keras can either use Tensorflow or Theano as a backend. At the time of this writing, TensorFlow supports only 64-bit Python 3.5 on Windows. This doesn't work for us, but if you are using Python 3.5, then by all means, feel free to give it a try. By default, we will use Theano as our backend, using the commands below:
+
+```
+$ cp ~/.keras/keras.json ~/.keras/keras.json.bak
+$ echo -e '{\n\t"image_dim_ordering": "th",\n\t"epsilon": 1e-07,\n\t"floatx": "float32",\n\t"backend": "theano"\n}' >> ~/.keras/keras_theano.json
+$ echo -e '{\n\t"image_dim_ordering": "tf",\n\t"epsilon": 1e-07,\n\t"floatx": "float32",\n\t"backend": "tensorflow"\n}' >> ~/.keras/keras_tensorflow.json
+$ cp -f ~/.keras/keras_theano.json ~/.keras/keras.json
+```
 
 ## Validating our GPU install with Keras
 
 We can train a simple convnet ([convolutional neural network](https://en.wikipedia.org/wiki/Convolutional_neural_network)) on the [MNIST dataset](https://en.wikipedia.org/wiki/MNIST_database#Dataset) by using one of the example scripts provided with Keras. The file is called `mnist_cnn.py` and can be found in the `examples` folder:
 
 ```
-$ cd /c/toolkits/keras-1.0.5/examples
+$ THEANO_FLAGS=$THEANO_FLAGS_GPU
+$ cd /c/toolkits/keras-1.1.0/examples
 $ python mnist_cnn.py
 ```
 
-![](img/mnist_cnn_gpu_log.png)
+![](img/mnist_cnn_gpu_log-2016-10.png)
 
-Without cuDNN, each epoch takes about 21s. If you install [TechPowerUp's GPU-Z](https://www.techpowerup.com/downloads/2718/techpowerup-gpu-z-v0-8-9/mirrors), you can track how well the GPU is being leveraged. Here, in the case of this convnet (no cuDNN), we max out at 76% GPU usage on average:
+Without cuDNN, each epoch takes about 20s. If you install [TechPowerUp's GPU-Z](https://www.techpowerup.com/downloads/SysInfo/GPU-Z/), you can track how well the GPU is being leveraged. Here, in the case of this convnet (no cuDNN), we max out at 92% GPU usage on average:
 
-![](img/mnist_cnn_gpu_usage.png)
+![](img/mnist_cnn_gpu_usage-2016-10.png)
 
-## cuDNN v5 (Conditional)
+## cuDNN v5.1 (August 10, 2016) for CUDA 8.0 (Conditional)
 
 If you're not going to train convnets then you might not really benefit from installing cuDNN. Per NVidia's [website](https://developer.nvidia.com/cudnn), "cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers," hallmarks of convolution network architectures. Theano is mentioned in the list of [frameworks that support cuDNN v5](https://developer.nvidia.com/deep-learning-frameworks) for GPU acceleration.
 
-If you are going to train convnets, then download cuDNN from [here](https://developer.nvidia.com/rdp/cudnn-download). Choose the cuDNN Library for Windows10 dated May 12, 2016:
+If you are going to train convnets, then download cuDNN from [here](https://developer.nvidia.com/rdp/cudnn-download). Choose the cuDNN Library for Windows10 dated August 10, 2016:
 
-![](img/cudnn-download.png)
+![](img/cudnn-download-2016-10.png)
 
-The downloaded ZIP file contains three directories (`bin`, `include`, `lib`). Extract those directories and copy the files they contain to the identically named folders in `C:\toolkits\cuda-7.5.18`.
+The downloaded ZIP file contains three directories (`bin`, `include`, `lib`). Extract those directories and copy the files they contain to the identically named folders in `C:\toolkits\cuda-8.0.44`.
 
 To enable cuDNN, create a new sysenv variable named `THEANO_FLAGS_GPU_DNN` with the following value:
 
@@ -342,21 +412,25 @@ Then, run the following commands:
 
 ```
 $ THEANO_FLAGS=$THEANO_FLAGS_GPU_DNN
-$ cd /c/toolkits/keras-1.0.5/examples
+$ cd /c/toolkits/keras-1.1.0/examples
 $ python mnist_cnn.py
 ```
 
-> Note: If you get a `cuDNN not available` message after this, try cleaning your `C:\Users\username\AppData\Local\Theano` directory (replace username with your login name).
+> Note: If you get a `cuDNN not available` message after this, try cleaning your `C:\Users\username\AppData\Local\Theano` directory (replace username with your login name). If you get an error similar to `cudnn error: Mixed dnn version. The header is from one version, but we link with a different version (5010, 5005)`, try cuDNN v5.0 instead of cuDNN v5.1. Windows will sometimes also helpfully block foreign `.dll` files from running on your computer. If that is the case, right click and unblock the files to allow them to be used.
 
 Here's the (cleaned up) execution log for the simple convnet Keras example, using cuDNN:
 
-![](img/mnist_cnn_gpu_cudnn_log.png)
+![](img/mnist_cnn_gpu_cudnn_log-2016-10.png)
 
-Now, each epoch takes about 4s, instead of 21s, **a huge improvement in speed**, with roughly the same GPU usage:
+Now, each epoch takes about 3s, instead of 20s, **a large improvement in speed**, with slightly lower GPU usage:
 
-![](img/mnist_cnn_gpu_cudnn_usage.png)
+![](img/mnist_cnn_gpu_cudnn_usage-2016-10.png)
 
-We're done!
+The `Your cuDNN version is more recent than the one Theano officially supports` message certainly sounds ominous but a test accuracy of 0.9899 would suggest that it can be safely ignored. So...
+
+...we're done!
+
+
 
 # References
 
