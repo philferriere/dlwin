@@ -72,7 +72,7 @@ Run the downloaded executable to install Visual Studio, using whatever additiona
 
 ## Anaconda (64-bit)
 
-This tutorial was initially created with Python 2.7, but Python 3.5 works too. The newest Anaconda version uses Python 3.6, but that version is still [poorly supported](https://github.com/tensorflow/tensorflow/issues/6999). 
+This tutorial was initially created with Python 2.7, but Python 3.5 works too. The newest Anaconda version uses Python 3.6, but that version is still [poorly supported](https://github.com/tensorflow/tensorflow/issues/6999), so we stick to an older version that is known to work well. 
 > Depending on your installation use `c:\toolkits\anaconda3-4.2.0` instead of `c:\toolkits\anaconda2-4.2.0`.
 
 Download the appropriate Anaconda version from [here](https://www.continuum.io/downloads), 
@@ -221,7 +221,7 @@ Download OpenBLAS from [here](https://sourceforge.net/projects/openblas/files/v0
 
 > Note that the [documentation](http://deeplearning.net/software/theano_versions/dev/install_windows.html#install-windows) was updated an now recommends MKL-Service, so the OpenBLAS steps might be skipped and parameters indicating OpenBLAS might be ommitted (so `floatX=float32,device=cpu,lib.cnmem=0.8,blas.ldflags=-LC:/toolkits/openblas-0.2.19/bin -lopenblas` becomes `floatX=float32,device=cpu,lib.cnmem=0.8`).
 
-Install the MKL-Service library which provides an alternative to OpenBLAS via conda
+The MKL-Service library which provides an alternative to OpenBLAS can be installed via conda
 
 `$ conda install mkl-service`
 
@@ -360,7 +360,7 @@ $ python cpu_gpu_test.py
 
 ![](img/theano-gpu_test-2016-10.png)
 
-Almost **a 68:1 improvement**. It works! Great, we're done with setting up Theano 0.8.2.
+Almost **a 68:1 improvement**. It works! Great, we're done with setting up Theano 0.9.
 
 ## Validating our GPU install with Keras
 
@@ -428,7 +428,11 @@ When running the MNIST-dataset example again, we should get similar or potential
 
 ![](img/tensorflow_mnist.png)
 
-The warnings at the beginning are annoying, but so far there is [no supported way](https://www.tensorflow.org/install/install_sources) of building Tensorflow on Windows with those optimizations, so we have to stay put and simply ignore them. Hopefully that will be [fixed](https://github.com/tensorflow/tensorflow/issues/7778) [soon](https://github.com/tensorflow/tensorflow/issues/7257) so people don't have to [build Tensorflow](https://stackoverflow.com/questions/42603407/how-to-compile-tensor-flow-with-sse-and-and-avx-instructions-on-windows/42755665#42755665) for [themselves](https://github.com/yaroslavvb/tensorflow-community-wheels).
+The warnings at the beginning are annoying, but so far there is [no supported way](https://www.tensorflow.org/install/install_sources) of building Tensorflow on Windows with those optimizations, so we have to stay put and simply ignore them. Hopefully that will be [fixed](https://github.com/tensorflow/tensorflow/issues/7778) [soon](https://github.com/tensorflow/tensorflow/issues/7257) so people don't have to [build Tensorflow](https://github.com/tensorflow/tensorflow/tree/v1.1.0/tensorflow/contrib/cmake) for [themselves](https://github.com/yaroslavvb/tensorflow-community-wheels) because that's [quite](https://stackoverflow.com/questions/42603407/how-to-compile-tensor-flow-with-sse-and-and-avx-instructions-on-windows?noredirect=1&lq=1) [tricky](https://stackoverflow.com/questions/44071608/compiling-tensorflow-with-cmake-on-windows-fails-with-file-version-info-cc-not-f?noredirect=1&lq=1).
+
+So...
+
+... that's it. Enjoy your super-fast installation. 
 
 # References
 
