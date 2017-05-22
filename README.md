@@ -1,4 +1,4 @@
-GPU-accelerated Tensorflow or Theano & Keras on Windows 10 native
+GPU-accelerated Keras with Tensorflow or Theano on Windows 10 native
 ===================================================
 
 **>> LAST UPDATED MAY, 2017 <<**
