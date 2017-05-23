@@ -16,7 +16,7 @@ Here's a summary list of the tools and libraries we use for deep learning on Win
 
 1. Visual Studio 2015 Community Edition Update 3 w. Windows Kit 10.0.10240.0
    - Used for its C/C++ compiler (not its IDE) and SDK
-2. Anaconda (64-bit) w. Python 2.7 (Anaconda2-4.2.0) or Python 3.5 (Anaconda3-4.2.0)
+2. Anaconda (64-bit) w. Python 2.7 (Anaconda2-4.2.0) [no Tensorlfow support] or Python 3.5 (Anaconda3-4.2.0) [for Tensorflow support]
    - A Python distro that gives us NumPy, SciPy, and other scientific libraries
 3. CUDA 8.0.61 (64-bit)
    - Used for its GPU math libraries, card driver, and CUDA compiler
