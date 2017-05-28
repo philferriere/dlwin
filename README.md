@@ -64,9 +64,17 @@ Run the downloaded executable to install Visual Studio, using whatever additiona
 
 ![](img/vs2015-install-part4b-2016-10.png)
 
-1. Add `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin` to your `PATH`, based on where you installed VS 2015.
-2. Define sysenv variable `INCLUDE` with the value `C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt`
-3. Define sysenv variable `LIB` with the value `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10240.0\um\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10240.0\ucrt\x64`
+Execute the following Powershell to set environment variables
+
+    # PowerShell (from an elevated prompt)
+    # Add C++ compiler to path
+    [Environment]::SetEnvironmentVariable( "Path", $env:Path + ";${env:ProgramFiles(x86)}\Microsoft Visual Studio 14.0\VC\bin", "Machine")
+    
+    #Add SDK Environment variable paths
+    $sdkInclude = "${env:ProgramFiles(x86)}\Windows Kits\10\Include\10.0.10240.0"
+    [Environment]::SetEnvironmentVariable("INCLUDE", "$sdkInclude\ucrt"   , "Machine")
+    [Environment]::SetEnvironmentVariable("LIB", "$sdkInclude\um\x64;$sdkInclude\ucrt\x64", "Machine")
+    
 
 > Reference Note: We couldn't run any Theano python files until we added the last two env variables above. We would get a `c:\program files (x86)\microsoft visual studio 14.0\vc\include\crtdefs.h(10): fatal error C1083: Cannot open include file: 'corecrt.h': No such file or directory` error at compile time and missing `kernel32.lib uuid.lib ucrt.lib` errors at link time. True, you could probably run `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat` (with proper params) every single time you open a MINGW cmd prompt, but, obviously, none of the sysenv vars would stick from one session to the next.
 
