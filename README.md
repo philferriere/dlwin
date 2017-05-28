@@ -15,7 +15,7 @@ For the old installation instructions from January 2017, check-out [this readme]
 Here's a summary list of the tools and libraries we use for deep learning on Windows 10 (Version 1607 OS Build 14393.222):
 
 1. Visual Studio 2015 Community Edition Update 3 w. Windows Kit 10.0.10240.0
-   - Used for its C/C++ compiler (not its IDE) and SDK
+   - Used for its C/C++ compiler (not its IDE) and SDK. This specific version has been selected due to [Windows Compiler Support in CUDA 8.0.61](http://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#system-requirements).
 2. Anaconda (64-bit) w. Python 2.7 (Anaconda2-4.2.0) [no Tensorflow support] or Python 3.5 (Anaconda3-4.2.0) [for Tensorflow support]
    - A Python distro that gives us NumPy, SciPy, and other scientific libraries
 3. CUDA 8.0.61 (64-bit)
