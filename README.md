@@ -28,7 +28,7 @@ Here's a summary list of the tools and libraries we use for deep learning on Win
    - Used for deep learning on top of Theano
 7. OpenBLAS 0.2.19 (Optional)
    - Used for its CPU-optimized implementation of many linear algebra operations
-8. cuDNN v5.1 (August 10, 2016) for CUDA 8.0 (Conditional)
+8. cuDNN v5.1 (Jan 20, 2017) for CUDA 8.0 (Conditional)
    - Used to run vastly faster convolution neural networks
 9. Tensorflow 1.1.0
    - Used to evaluate mathematical expressions on multi-dimensional arrays and serves as an alternative backend to Theano
@@ -378,7 +378,7 @@ Without cuDNN, each epoch takes about 20s. If you install [TechPowerUp's GPU-Z](
 
 ![](img/mnist_cnn_gpu_usage-2016-10.png)
 
-## cuDNN v5.1 for CUDA 8.0 (Conditional)
+## cuDNN v5.1 (Jan 20, 2017) for CUDA 8.0 (Conditional)
 
 If you're not going to train convnets then you might not really benefit from installing cuDNN. Per NVidia's [website](https://developer.nvidia.com/cudnn), "cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers," hallmarks of convolution network architectures. Theano is mentioned in the list of [frameworks that support cuDNN v5](https://developer.nvidia.com/deep-learning-frameworks) for GPU acceleration.
 
