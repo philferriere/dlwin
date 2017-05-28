@@ -386,7 +386,7 @@ If you are going to train convnets, then download cuDNN from [here](https://deve
 
 ![](img/cudnn-download-2016-10.png)
 
-The downloaded ZIP file contains three directories (`bin`, `include`, `lib`). Extract those directories and copy the files they contain to the identically named folders in `C:\toolkits\cuda-8.0.61`.
+The downloaded ZIP file contains three directories (`bin`, `include`, `lib`). Extract those directories and copy the files they contain to the identically named folders in `C:\toolkits\cuda-8.0.61` (The same folder we earlier created an environment variable for: `%CUDA_PATH%`).
 
 To enable cuDNN, create a new sysenv variable named `THEANO_FLAGS_GPU_DNN` with the following value:
 
