@@ -46,13 +46,7 @@ We like to keep our toolkits and libraries in a single root folder boringly call
 
 ## Visual Studio 2015 Community Edition Update 3 w. Windows Kit 10.0.10240.0
 
-You can download Visual Studio 2015 Community Edition from [here](https://www.microsoft.com/en-us/download/details.aspx?id=48146):
-
-![](img/vs2015-download-part1-2016-10.png)
-
-Select the executable and let it decide what to download on its own:
-
-![](img/vs2015-download-part2-2016-10.png)
+Download [Visual Studio 2015 Community Edition](https://www.visualstudio.com/vs/older-downloads).
 
 Run the downloaded executable to install Visual Studio, using whatever additional config settings work best for you:
 
