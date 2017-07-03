@@ -64,7 +64,7 @@ Run the downloaded executable to install Visual Studio, using whatever additiona
 
 This tutorial was initially created using Python 2.7. As Tensorflow has become the backend of choice for Keras, we've decided to document installation steps using Python 3.6 by default. Depending on your own preferred configuration, use `e:\toolkits.win\anaconda3-4.4.0` or `e:\toolkits.win\anaconda2-4.4.0` as the folder where to install Anaconda.
 
-Download the Python 3.6 Anaconda version from [here]((https://repo.continuum.io/archive/Anaconda3-4.4.0-Windows-x86_64.exe) and the Python 2.7 version from [there](https://repo.continuum.io/archive/Anaconda2-4.4.0-Windows-x86_64.exe):
+Download the Python 3.6 Anaconda version from [here](https://repo.continuum.io/archive/Anaconda3-4.4.0-Windows-x86_64.exe) and the Python 2.7 version from [there](https://repo.continuum.io/archive/Anaconda2-4.4.0-Windows-x86_64.exe):
 
 ![](img/anaconda-4.4.0-download-2017-07.png)
 
