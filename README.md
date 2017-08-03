@@ -464,7 +464,7 @@ Theano was automatically installed with Keras. To make sure we can easily switch
 
 - sysenv variable `THEANO_FLAGS_CPU` with the value:
 
-`float32,device=cpu`
+`floatX=float32,device=cpu`
 
 - sysenv variable `THEANO_FLAGS_GPU` with the value:
 
