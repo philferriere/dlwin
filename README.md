@@ -211,7 +211,7 @@ Run the downloaded installer. Install the files in `e:\toolkits.win\cuda-8.0.61`
 
 ![](img/cuda8-install-part2-2016-10.png)
 
-![](img/cuda8-install-part3-2017-10.png)
+![](img/cuda8-install-part3-2017-07.png)
 
 ![](img/cuda8-install-part4-2016-10.png)
 
@@ -255,6 +255,8 @@ The following NEW packages will be INSTALLED:
 Proceed ([y]/n)? y
 ```
 
+> Note: As was reported by @bonifacio123 and @wpmarinho [here](https://github.com/philferriere/dlwin/issues/40), you may get a `ERROR (theano.gpuarray): Could not initialize pygpu, support disabled` error when using the flags `THEANO_FLAGS_GPU_DNN` with libgpuarray 0.6.2. If using cuDNN is crucial to your experiment, you can try using a more recent version of `libgpuarray` by running the following command instead: `conda install pygpu==0.6.9 nose`, keeping in mind that libgpuarray 0.6.2 is still the only stable version for Theano 0.9.0.
+ 
 Then, install Keras with Theano as follows:
 
 ```
