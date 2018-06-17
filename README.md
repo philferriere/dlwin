@@ -16,7 +16,7 @@ We also found enough misguiding/deprecated information out there to make it wort
 
 If you **must** run your DL setup on Windows 10, then the information contained here will hopefully be useful to you.
 
-Older installation instructions from [May 2017](README_May2017.md) and [January 2017](README_Jan2017.md) are still available. They allow you to use Theano as a Keras backend.
+Older installation instructions from [July 2017](README_July2017.md), [May 2017](README_May2017.md) and [January 2017](README_Jan2017.md) are still available. They allow you to use Theano as a Keras backend.
 
 # TOC
 
