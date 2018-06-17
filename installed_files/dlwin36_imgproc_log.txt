@@ -1,0 +1,184 @@
+(dlwin36) $ conda install --yes pillow scikit-image
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36
+
+  added / updated specs:
+    - pillow
+    - scikit-image
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    dask-0.18.0                |           py36_0           3 KB
+    dask-core-0.18.0           |           py36_0         1.1 MB
+    distributed-1.22.0         |           py36_0         812 KB
+    psutil-5.4.6               |   py36hfa6e2cd_0         321 KB
+    sortedcontainers-2.0.4     |           py36_0          43 KB
+    ------------------------------------------------------------
+                                           Total:         2.2 MB
+
+The following NEW packages will be INSTALLED:
+
+    bokeh:            0.12.16-py36_0
+    click:            6.7-py36hec8c647_0
+    cloudpickle:      0.5.3-py36_0
+    cytoolz:          0.9.0.1-py36hfa6e2cd_0
+    dask:             0.18.0-py36_0
+    dask-core:        0.18.0-py36_0
+    distributed:      1.22.0-py36_0
+    heapdict:         1.0.0-py36_2
+    imageio:          2.3.0-py36_0
+    libtiff:          4.0.9-hb8ad9f9_1
+    locket:           0.2.0-py36hfed976d_1
+    msgpack-python:   0.5.6-py36he980bc4_0
+    networkx:         2.1-py36_0
+    olefile:          0.45.1-py36_0
+    packaging:        17.1-py36_0
+    partd:            0.3.8-py36hc8e763b_0
+    pillow:           5.1.0-py36h0738816_0
+    psutil:           5.4.6-py36hfa6e2cd_0
+    pywavelets:       0.5.2-py36hc649158_0
+    pyyaml:           3.12-py36h1d1928f_1
+    scikit-image:     0.13.1-py36hfa6e2cd_1
+    sortedcontainers: 2.0.4-py36_0
+    tblib:            1.3.2-py36h30f5020_0
+    tk:               8.6.7-hcb92d03_3
+    toolz:            0.9.0-py36_0
+    yaml:             0.1.7-hc54c509_2
+    zict:             0.1.3-py36h2d8e73e_0
+
+
+Downloading and Extracting Packages
+dask-0.18.0          |    3 KB | ##################################################################################################################### | 100%
+dask-core-0.18.0     |  1.1 MB | ##################################################################################################################### | 100%
+distributed-1.22.0   |  812 KB | ##################################################################################################################### | 100%
+psutil-5.4.6         |  321 KB | ##################################################################################################################### | 100%
+sortedcontainers-2.0 |   43 KB | ##################################################################################################################### | 100%
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+
+(dlwin36) $ conda install --yes -c conda-forge opencv
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36
+
+  added / updated specs:
+    - opencv
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    opencv-3.4.1               |         py36_200        52.8 MB  conda-forge
+    pyqt-5.6.0                 |           py36_2         4.5 MB
+    libpng-1.6.34              |           vc14_0         547 KB  conda-forge
+    libsodium-1.0.16           |           vc14_0         582 KB  conda-forge
+    tk-8.6.7                   |           vc14_0         3.5 MB  conda-forge
+    hdf5-1.10.2                |           vc14_0        18.9 MB  conda-forge
+    certifi-2018.4.16          |           py36_0         143 KB  conda-forge
+    openssl-1.0.2o             |           vc14_0         5.4 MB  conda-forge
+    zeromq-4.2.5               |           vc14_1         9.6 MB  conda-forge
+    libwebp-0.5.2              |           vc14_7         1.1 MB  conda-forge
+    yaml-0.1.7                 |           vc14_0         103 KB  conda-forge
+    libtiff-4.0.9              |           vc14_0         616 KB  conda-forge
+    matplotlib-2.2.2           |           py36_1         6.5 MB  conda-forge
+    qt-5.6.2                   |           vc14_1        55.6 MB  conda-forge
+    icu-58.2                   |           vc14_0        21.8 MB  conda-forge
+    sqlite-3.22.0              |           vc14_0         907 KB  conda-forge
+    zlib-1.2.11                |           vc14_0         119 KB  conda-forge
+    ca-certificates-2018.4.16  |                0         176 KB  conda-forge
+    jpeg-9b                    |           vc14_2         314 KB  conda-forge
+    freetype-2.8.1             |           vc14_0         469 KB  conda-forge
+    ------------------------------------------------------------
+                                           Total:       183.6 MB
+
+The following NEW packages will be INSTALLED:
+
+    libwebp:         0.5.2-vc14_7         conda-forge [vc14]
+    opencv:          3.4.1-py36_200       conda-forge
+
+The following packages will be UPDATED:
+
+    ca-certificates: 2018.03.07-0                     --> 2018.4.16-0      conda-forge
+    certifi:         2018.4.16-py36_0                 --> 2018.4.16-py36_0 conda-forge
+    freetype:        2.8-h51f8f2c_1                   --> 2.8.1-vc14_0     conda-forge [vc14]
+    jpeg:            9b-hb83a4c4_2                    --> 9b-vc14_2        conda-forge [vc14]
+    libpng:          1.6.34-h79bbb47_0                --> 1.6.34-vc14_0    conda-forge [vc14]
+    libsodium:       1.0.16-h9d3ae62_0                --> 1.0.16-vc14_0    conda-forge [vc14]
+    matplotlib:      2.2.2-py36h153e9ff_1             --> 2.2.2-py36_1     conda-forge
+    openssl:         1.0.2o-h8ea7d77_0                --> 1.0.2o-vc14_0    conda-forge [vc14]
+    zeromq:          4.2.5-hc6251cf_0                 --> 4.2.5-vc14_1     conda-forge [vc14]
+
+The following packages will be DOWNGRADED:
+
+    hdf5:            1.10.2-hac2f561_1                --> 1.10.2-vc14_0    conda-forge [vc14]
+    icu:             58.2-ha66f8fd_1                  --> 58.2-vc14_0      conda-forge [vc14]
+    libtiff:         4.0.9-hb8ad9f9_1                 --> 4.0.9-vc14_0     conda-forge [vc14]
+    pyqt:            5.9.2-py36h1aa27d4_0             --> 5.6.0-py36_2
+    qt:              5.9.5-vc14he4a7d60_0             --> 5.6.2-vc14_1     conda-forge [vc14]
+    sqlite:          3.23.1-h35aae40_0                --> 3.22.0-vc14_0    conda-forge [vc14]
+    tk:              8.6.7-hcb92d03_3                 --> 8.6.7-vc14_0     conda-forge [vc14]
+    yaml:            0.1.7-hc54c509_2                 --> 0.1.7-vc14_0     conda-forge [vc14]
+    zlib:            1.2.11-h8395fce_2                --> 1.2.11-vc14_0    conda-forge [vc14]
+
+
+Downloading and Extracting Packages
+opencv-3.4.1         | 52.8 MB | ##################################################################################################################### | 100%
+pyqt-5.6.0           |  4.5 MB | ##################################################################################################################### | 100%
+libpng-1.6.34        |  547 KB | ##################################################################################################################### | 100%
+libsodium-1.0.16     |  582 KB | ##################################################################################################################### | 100%
+tk-8.6.7             |  3.5 MB | ##################################################################################################################### | 100%
+hdf5-1.10.2          | 18.9 MB | ##################################################################################################################### | 100%
+certifi-2018.4.16    |  143 KB | ##################################################################################################################### | 100%
+openssl-1.0.2o       |  5.4 MB | ##################################################################################################################### | 100%
+zeromq-4.2.5         |  9.6 MB | ##################################################################################################################### | 100%
+libwebp-0.5.2        |  1.1 MB | ##################################################################################################################### | 100%
+yaml-0.1.7           |  103 KB | ##################################################################################################################### | 100%
+libtiff-4.0.9        |  616 KB | ##################################################################################################################### | 100%
+matplotlib-2.2.2     |  6.5 MB | ##################################################################################################################### | 100%
+qt-5.6.2             | 55.6 MB | ##################################################################################################################### | 100%
+icu-58.2             | 21.8 MB | ##################################################################################################################### | 100%
+sqlite-3.22.0        |  907 KB | ##################################################################################################################### | 100%
+zlib-1.2.11          |  119 KB | ##################################################################################################################### | 100%
+ca-certificates-2018 |  176 KB | ##################################################################################################################### | 100%
+jpeg-9b              |  314 KB | ##################################################################################################################### | 100%
+freetype-2.8.1       |  469 KB | ##################################################################################################################### | 100%
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+
+(dlwin36) $ pip install git+https://github.com/aleju/imgaug
+Collecting git+https://github.com/aleju/imgaug
+  Cloning https://github.com/aleju/imgaug to c:\users\phil\appdata\local\temp\pip-req-build-6zmfxbgk
+Requirement already satisfied: scipy in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from imgaug==0.2.5) (1.1.0)
+Requirement already satisfied: scikit-image>=0.11.0 in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from imgaug==0.2.5) (0.13.1)
+Requirement already satisfied: numpy>=1.7.0 in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from imgaug==0.2.5) (1.14.5)
+Requirement already satisfied: six in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from imgaug==0.2.5) (1.11.0)
+Requirement already satisfied: matplotlib>=1.3.1 in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from scikit-image>=0.11.0->imgaug==0.2.5) (2.2.2)
+Requirement already satisfied: networkx>=1.8 in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from scikit-image>=0.11.0->imgaug==0.2.5) (2.1)
+
+Requirement already satisfied: pillow>=2.1.0 in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from scikit-image>=0.11.0->imgaug==0.2.5) (5.1.0)
+Requirement already satisfied: PyWavelets>=0.4.0 in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from scikit-image>=0.11.0->imgaug==0.2.5) (0.5.2)
+Requirement already satisfied: cycler>=0.10 in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from matplotlib>=1.3.1->scikit-image>=0.11.0->imgaug==0.2.5) (0.10.0)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from matplotlib>=1.3.1->scikit-image>=0.11.0->imgaug==0.2.5) (2.2.0)
+Requirement already satisfied: python-dateutil>=2.1 in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from matplotlib>=1.3.1->scikit-image>=0.11.0->imgaug==0.2.5) (2.7.3)
+Requirement already satisfied: pytz in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from matplotlib>=1.3.1->scikit-image>=0.11.0->imgaug==0.2.5) (2018.4)
+Requirement already satisfied: kiwisolver>=1.0.1 in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from matplotlib>=1.3.1->scikit-image>=0.11.0->imgaug==0.2.5) (1.0.1)
+Requirement already satisfied: decorator>=4.1.0 in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from networkx>=1.8->scikit-image>=0.11.0->imgaug==0.2.5) (4.3.0)
+Requirement already satisfied: setuptools in e:\toolkits.win\anaconda3-5.2.0\envs\dlwin36\lib\site-packages (from kiwisolver>=1.0.1->matplotlib>=1.3.1->scikit-image>=0.11.0->imgaug==0.2.5) (39.2.0)
+Building wheels for collected packages: imgaug
+  Running setup.py bdist_wheel for imgaug ... done
+  Stored in directory: C:\Users\Phil\AppData\Local\Temp\pip-ephem-wheel-cache-lnj_160m\wheels\9c\f6\aa\41dcf2f29cc1de1da4ad840ef5393514bead64ac9e644260ff
+Successfully built imgaug
+distributed 1.22.0 requires msgpack, which is not installed.
+Installing collected packages: imgaug
+Successfully installed imgaug-0.2.5
