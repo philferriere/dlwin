@@ -6,7 +6,6 @@ GPU-accelerated Deep Learning on Windows 10 native (Keras/Tensorflow/CNTK/MXNet 
 **This latest update:**
 - **supports 5 frameworks (Keras/Tensorflow/CNTK/MXNet and PyTorch),**
 - **supports 3 GPU-accelerated Keras backends (CNTK, Tensorflow, or MXNet),**
-- **doesn't require installing Visual Studio,**
 - **doesn't require installing MinGW separately,**
 - **uses more recent versions of many python libraries.**
 
