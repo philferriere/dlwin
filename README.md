@@ -193,6 +193,8 @@ After completion, the installer should have created a system environment (sysenv
 
 Per NVidia's [website](https://developer.nvidia.com/cudnn), "cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers," hallmarks of convolution network architectures. Download cuDNN from [here](https://developer.nvidia.com/rdp/cudnn-download). Choose the cuDNN Library for Windows 10 that matches the CUDA version:
 
+Nvidia has recently removed the option for the 7.0.4 Windows download. You can download it [here](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.0.4/prod/9.0_20171031/cudnn-9.0-windows10-x64-v7).
+
 ![](img/cudnn-7.0.4-for-cuda-9.0-setup1-2018-06.png)
 
 The downloaded ZIP file contains three directories (`bin`, `include`, `lib`). Extract and copy their content to the identically-named `bin`, `include` and `lib` directories in`%CUDA_PATH%`.
