@@ -52,6 +52,7 @@ Older installation instructions from [July 2017](README_July2017.md), [May 2017]
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 # Dependencies
+
 Here's a summary list of the tools and libraries we use for deep learning on Windows 10 (Version 1709 OS Build 16299.371):
 
 1. Visual Studio 2015 Community Edition Update 3 w. Windows Kit 10.0.10240.0
